@@ -1,0 +1,55 @@
+enum Gender {
+  MALE
+  FEMALE
+}
+
+type Lover {
+  id: ID!
+  name: String!
+  gender: Gender!
+  season: Int!
+  firstEpNum: Int!
+  image: String
+  description: String
+  age: Int
+  job: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type User {
+  id: ID!
+  nickName: String!
+  gender: Gender!
+  age: Int!
+  boards: [Board!]!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Arrow {
+  id: ID!
+  board: Board
+  from: Lover!
+  to: Lover!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Episode {
+  id: ID!
+  number: Int!
+  season: Int!
+  arrows: [Arrow!]
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Board {
+  id: ID!
+  episode: Episode!
+  owner: User!
+  arrows: [Arrow!]!
+  createdAt: String!
+  updatedAt: String!
+}

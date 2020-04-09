@@ -1,4 +1,55 @@
-type User {
+enum Gender {
+  MALE
+  FEMALE
+}
+
+type Lover {
   id: ID! @id
   name: String!
+  gender: Gender!
+  season: Int!
+  firstEpNum: Int!
+  image: String
+  description: String
+  age: Int
+  job: String
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type User {
+  id: ID! @id
+  nickName: String!
+  gender: Gender!
+  age: Int!
+  boards: [Board!]!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Arrow {
+  id: ID! @id
+  board: Board @relation(link: INLINE)
+  from: Lover! @relation(name: "ArrowFrom")
+  to: Lover! @relation(name: "ArrowTo")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Episode {
+  id: ID! @id
+  number: Int!
+  season: Int!
+  arrows: [Arrow!]
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Board {
+  id: ID! @id
+  episode: Episode!
+  owner: User! @relation(link: INLINE)
+  arrows: [Arrow]!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }

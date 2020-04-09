@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["ES2016", "esnext.asynciterable", "DOM"]
+    "lib": ["ES2016", "esnext.asynciterable", "DOM"],
+    "esModuleInterop": true
   }
 }

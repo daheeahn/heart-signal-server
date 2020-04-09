@@ -2,113 +2,260 @@
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-export const typeDefs = /* GraphQL */ `type AggregateUser {
-  count: Int!
-}
-
-type BatchPayload {
-  count: Long!
-}
-
-scalar Long
-
-type Mutation {
-  createUser(data: UserCreateInput!): User!
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  deleteUser(where: UserWhereUniqueInput!): User
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
-}
-
-enum MutationType {
-  CREATED
-  UPDATED
-  DELETED
-}
-
-interface Node {
-  id: ID!
-}
-
-type PageInfo {
-  hasNextPage: Boolean!
-  hasPreviousPage: Boolean!
-  startCursor: String
-  endCursor: String
-}
-
-type Query {
+export const typeDefs = /* GraphQL */ `type Query {
+  arrow(where: ArrowWhereUniqueInput!): Arrow
+  arrows(where: ArrowWhereInput, orderBy: ArrowOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Arrow]!
+  arrowsConnection(where: ArrowWhereInput, orderBy: ArrowOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ArrowConnection!
+  board(where: BoardWhereUniqueInput!): Board
+  boards(where: BoardWhereInput, orderBy: BoardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Board]!
+  boardsConnection(where: BoardWhereInput, orderBy: BoardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BoardConnection!
+  episode(where: EpisodeWhereUniqueInput!): Episode
+  episodes(where: EpisodeWhereInput, orderBy: EpisodeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Episode]!
+  episodesConnection(where: EpisodeWhereInput, orderBy: EpisodeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EpisodeConnection!
+  lover(where: LoverWhereUniqueInput!): Lover
+  lovers(where: LoverWhereInput, orderBy: LoverOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Lover]!
+  loversConnection(where: LoverWhereInput, orderBy: LoverOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LoverConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   node(id: ID!): Node
 }
 
-type Subscription {
-  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
-}
-
-type User {
+type Arrow {
   id: ID!
-  name: String!
+  board: Board
+  from: Lover!
+  to: Lover!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
-type UserConnection {
-  pageInfo: PageInfo!
-  edges: [UserEdge]!
-  aggregate: AggregateUser!
+type Board {
+  id: ID!
+  episode: Episode!
+  owner: User!
+  arrows(where: ArrowWhereInput, orderBy: ArrowOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Arrow!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
-input UserCreateInput {
+type Episode {
+  id: ID!
+  number: Int!
+  season: Int!
+  arrows(where: ArrowWhereInput, orderBy: ArrowOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Arrow!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input ArrowWhereInput {
   id: ID
-  name: String!
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  board: BoardWhereInput
+  from: LoverWhereInput
+  to: LoverWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [ArrowWhereInput!]
+  OR: [ArrowWhereInput!]
+  NOT: [ArrowWhereInput!]
 }
 
-type UserEdge {
-  node: User!
-  cursor: String!
+input BoardWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  episode: EpisodeWhereInput
+  owner: UserWhereInput
+  arrows_every: ArrowWhereInput
+  arrows_some: ArrowWhereInput
+  arrows_none: ArrowWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [BoardWhereInput!]
+  OR: [BoardWhereInput!]
+  NOT: [BoardWhereInput!]
 }
 
-enum UserOrderByInput {
-  id_ASC
-  id_DESC
-  name_ASC
-  name_DESC
+input EpisodeWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  number: Int
+  number_not: Int
+  number_in: [Int!]
+  number_not_in: [Int!]
+  number_lt: Int
+  number_lte: Int
+  number_gt: Int
+  number_gte: Int
+  season: Int
+  season_not: Int
+  season_in: [Int!]
+  season_not_in: [Int!]
+  season_lt: Int
+  season_lte: Int
+  season_gt: Int
+  season_gte: Int
+  arrows_every: ArrowWhereInput
+  arrows_some: ArrowWhereInput
+  arrows_none: ArrowWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [EpisodeWhereInput!]
+  OR: [EpisodeWhereInput!]
+  NOT: [EpisodeWhereInput!]
 }
 
-type UserPreviousValues {
-  id: ID!
-  name: String!
-}
-
-type UserSubscriptionPayload {
-  mutation: MutationType!
-  node: User
-  updatedFields: [String!]
-  previousValues: UserPreviousValues
-}
-
-input UserSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: UserWhereInput
-  AND: [UserSubscriptionWhereInput!]
-  OR: [UserSubscriptionWhereInput!]
-  NOT: [UserSubscriptionWhereInput!]
-}
-
-input UserUpdateInput {
-  name: String
-}
-
-input UserUpdateManyMutationInput {
-  name: String
-}
+scalar DateTime
 
 input UserWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  nickName: String
+  nickName_not: String
+  nickName_in: [String!]
+  nickName_not_in: [String!]
+  nickName_lt: String
+  nickName_lte: String
+  nickName_gt: String
+  nickName_gte: String
+  nickName_contains: String
+  nickName_not_contains: String
+  nickName_starts_with: String
+  nickName_not_starts_with: String
+  nickName_ends_with: String
+  nickName_not_ends_with: String
+  gender: Gender
+  gender_not: Gender
+  gender_in: [Gender!]
+  gender_not_in: [Gender!]
+  age: Int
+  age_not: Int
+  age_in: [Int!]
+  age_not_in: [Int!]
+  age_lt: Int
+  age_lte: Int
+  age_gt: Int
+  age_gte: Int
+  boards_every: BoardWhereInput
+  boards_some: BoardWhereInput
+  boards_none: BoardWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+input LoverWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -137,12 +284,870 @@ input UserWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
-  AND: [UserWhereInput!]
-  OR: [UserWhereInput!]
-  NOT: [UserWhereInput!]
+  gender: Gender
+  gender_not: Gender
+  gender_in: [Gender!]
+  gender_not_in: [Gender!]
+  season: Int
+  season_not: Int
+  season_in: [Int!]
+  season_not_in: [Int!]
+  season_lt: Int
+  season_lte: Int
+  season_gt: Int
+  season_gte: Int
+  firstEpNum: Int
+  firstEpNum_not: Int
+  firstEpNum_in: [Int!]
+  firstEpNum_not_in: [Int!]
+  firstEpNum_lt: Int
+  firstEpNum_lte: Int
+  firstEpNum_gt: Int
+  firstEpNum_gte: Int
+  image: String
+  image_not: String
+  image_in: [String!]
+  image_not_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_gt: String
+  image_gte: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  age: Int
+  age_not: Int
+  age_in: [Int!]
+  age_not_in: [Int!]
+  age_lt: Int
+  age_lte: Int
+  age_gt: Int
+  age_gte: Int
+  job: String
+  job_not: String
+  job_in: [String!]
+  job_not_in: [String!]
+  job_lt: String
+  job_lte: String
+  job_gt: String
+  job_gte: String
+  job_contains: String
+  job_not_contains: String
+  job_starts_with: String
+  job_not_starts_with: String
+  job_ends_with: String
+  job_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [LoverWhereInput!]
+  OR: [LoverWhereInput!]
+  NOT: [LoverWhereInput!]
+}
+
+enum ArrowOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type User {
+  id: ID!
+  nickName: String!
+  gender: Gender!
+  age: Int!
+  boards(where: BoardWhereInput, orderBy: BoardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Board!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum BoardOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type Lover {
+  id: ID!
+  name: String!
+  gender: Gender!
+  season: Int!
+  firstEpNum: Int!
+  image: String
+  description: String
+  age: Int
+  job: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input ArrowWhereUniqueInput {
+  id: ID
+}
+
+type ArrowConnection {
+  pageInfo: PageInfo!
+  edges: [ArrowEdge]!
+  aggregate: AggregateArrow!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type ArrowEdge {
+  node: Arrow!
+  cursor: String!
+}
+
+type AggregateArrow {
+  count: Int!
+}
+
+input BoardWhereUniqueInput {
+  id: ID
+}
+
+type BoardConnection {
+  pageInfo: PageInfo!
+  edges: [BoardEdge]!
+  aggregate: AggregateBoard!
+}
+
+type BoardEdge {
+  node: Board!
+  cursor: String!
+}
+
+type AggregateBoard {
+  count: Int!
+}
+
+input EpisodeWhereUniqueInput {
+  id: ID
+}
+
+enum EpisodeOrderByInput {
+  id_ASC
+  id_DESC
+  number_ASC
+  number_DESC
+  season_ASC
+  season_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type EpisodeConnection {
+  pageInfo: PageInfo!
+  edges: [EpisodeEdge]!
+  aggregate: AggregateEpisode!
+}
+
+type EpisodeEdge {
+  node: Episode!
+  cursor: String!
+}
+
+type AggregateEpisode {
+  count: Int!
+}
+
+input LoverWhereUniqueInput {
+  id: ID
+}
+
+enum LoverOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  gender_ASC
+  gender_DESC
+  season_ASC
+  season_DESC
+  firstEpNum_ASC
+  firstEpNum_DESC
+  image_ASC
+  image_DESC
+  description_ASC
+  description_DESC
+  age_ASC
+  age_DESC
+  job_ASC
+  job_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type LoverConnection {
+  pageInfo: PageInfo!
+  edges: [LoverEdge]!
+  aggregate: AggregateLover!
+}
+
+type LoverEdge {
+  node: Lover!
+  cursor: String!
+}
+
+type AggregateLover {
+  count: Int!
 }
 
 input UserWhereUniqueInput {
   id: ID
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  nickName_ASC
+  nickName_DESC
+  gender_ASC
+  gender_DESC
+  age_ASC
+  age_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type UserConnection {
+  pageInfo: PageInfo!
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+type UserEdge {
+  node: User!
+  cursor: String!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+interface Node {
+  id: ID!
+}
+
+type Mutation {
+  createArrow(data: ArrowCreateInput!): Arrow!
+  updateArrow(data: ArrowUpdateInput!, where: ArrowWhereUniqueInput!): Arrow
+  upsertArrow(where: ArrowWhereUniqueInput!, create: ArrowCreateInput!, update: ArrowUpdateInput!): Arrow!
+  deleteArrow(where: ArrowWhereUniqueInput!): Arrow
+  deleteManyArrows(where: ArrowWhereInput): BatchPayload!
+  createBoard(data: BoardCreateInput!): Board!
+  updateBoard(data: BoardUpdateInput!, where: BoardWhereUniqueInput!): Board
+  upsertBoard(where: BoardWhereUniqueInput!, create: BoardCreateInput!, update: BoardUpdateInput!): Board!
+  deleteBoard(where: BoardWhereUniqueInput!): Board
+  deleteManyBoards(where: BoardWhereInput): BatchPayload!
+  createEpisode(data: EpisodeCreateInput!): Episode!
+  updateEpisode(data: EpisodeUpdateInput!, where: EpisodeWhereUniqueInput!): Episode
+  updateManyEpisodes(data: EpisodeUpdateManyMutationInput!, where: EpisodeWhereInput): BatchPayload!
+  upsertEpisode(where: EpisodeWhereUniqueInput!, create: EpisodeCreateInput!, update: EpisodeUpdateInput!): Episode!
+  deleteEpisode(where: EpisodeWhereUniqueInput!): Episode
+  deleteManyEpisodes(where: EpisodeWhereInput): BatchPayload!
+  createLover(data: LoverCreateInput!): Lover!
+  updateLover(data: LoverUpdateInput!, where: LoverWhereUniqueInput!): Lover
+  updateManyLovers(data: LoverUpdateManyMutationInput!, where: LoverWhereInput): BatchPayload!
+  upsertLover(where: LoverWhereUniqueInput!, create: LoverCreateInput!, update: LoverUpdateInput!): Lover!
+  deleteLover(where: LoverWhereUniqueInput!): Lover
+  deleteManyLovers(where: LoverWhereInput): BatchPayload!
+  createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+}
+
+input ArrowCreateInput {
+  id: ID
+  board: BoardCreateOneWithoutArrowsInput
+  from: LoverCreateOneInput!
+  to: LoverCreateOneInput!
+}
+
+input BoardCreateOneWithoutArrowsInput {
+  create: BoardCreateWithoutArrowsInput
+  connect: BoardWhereUniqueInput
+}
+
+input BoardCreateWithoutArrowsInput {
+  id: ID
+  episode: EpisodeCreateOneInput!
+  owner: UserCreateOneWithoutBoardsInput!
+}
+
+input EpisodeCreateOneInput {
+  create: EpisodeCreateInput
+  connect: EpisodeWhereUniqueInput
+}
+
+input EpisodeCreateInput {
+  id: ID
+  number: Int!
+  season: Int!
+  arrows: ArrowCreateManyInput
+}
+
+input ArrowCreateManyInput {
+  create: [ArrowCreateInput!]
+  connect: [ArrowWhereUniqueInput!]
+}
+
+input UserCreateOneWithoutBoardsInput {
+  create: UserCreateWithoutBoardsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutBoardsInput {
+  id: ID
+  nickName: String!
+  gender: Gender!
+  age: Int!
+}
+
+input LoverCreateOneInput {
+  create: LoverCreateInput
+  connect: LoverWhereUniqueInput
+}
+
+input LoverCreateInput {
+  id: ID
+  name: String!
+  gender: Gender!
+  season: Int!
+  firstEpNum: Int!
+  image: String
+  description: String
+  age: Int
+  job: String
+}
+
+input ArrowUpdateInput {
+  board: BoardUpdateOneWithoutArrowsInput
+  from: LoverUpdateOneRequiredInput
+  to: LoverUpdateOneRequiredInput
+}
+
+input BoardUpdateOneWithoutArrowsInput {
+  create: BoardCreateWithoutArrowsInput
+  update: BoardUpdateWithoutArrowsDataInput
+  upsert: BoardUpsertWithoutArrowsInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: BoardWhereUniqueInput
+}
+
+input BoardUpdateWithoutArrowsDataInput {
+  episode: EpisodeUpdateOneRequiredInput
+  owner: UserUpdateOneRequiredWithoutBoardsInput
+}
+
+input EpisodeUpdateOneRequiredInput {
+  create: EpisodeCreateInput
+  update: EpisodeUpdateDataInput
+  upsert: EpisodeUpsertNestedInput
+  connect: EpisodeWhereUniqueInput
+}
+
+input EpisodeUpdateDataInput {
+  number: Int
+  season: Int
+  arrows: ArrowUpdateManyInput
+}
+
+input ArrowUpdateManyInput {
+  create: [ArrowCreateInput!]
+  update: [ArrowUpdateWithWhereUniqueNestedInput!]
+  upsert: [ArrowUpsertWithWhereUniqueNestedInput!]
+  delete: [ArrowWhereUniqueInput!]
+  connect: [ArrowWhereUniqueInput!]
+  set: [ArrowWhereUniqueInput!]
+  disconnect: [ArrowWhereUniqueInput!]
+  deleteMany: [ArrowScalarWhereInput!]
+}
+
+input ArrowUpdateWithWhereUniqueNestedInput {
+  where: ArrowWhereUniqueInput!
+  data: ArrowUpdateDataInput!
+}
+
+input ArrowUpdateDataInput {
+  board: BoardUpdateOneWithoutArrowsInput
+  from: LoverUpdateOneRequiredInput
+  to: LoverUpdateOneRequiredInput
+}
+
+input LoverUpdateOneRequiredInput {
+  create: LoverCreateInput
+  update: LoverUpdateDataInput
+  upsert: LoverUpsertNestedInput
+  connect: LoverWhereUniqueInput
+}
+
+input LoverUpdateDataInput {
+  name: String
+  gender: Gender
+  season: Int
+  firstEpNum: Int
+  image: String
+  description: String
+  age: Int
+  job: String
+}
+
+input LoverUpsertNestedInput {
+  update: LoverUpdateDataInput!
+  create: LoverCreateInput!
+}
+
+input ArrowUpsertWithWhereUniqueNestedInput {
+  where: ArrowWhereUniqueInput!
+  update: ArrowUpdateDataInput!
+  create: ArrowCreateInput!
+}
+
+input ArrowScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [ArrowScalarWhereInput!]
+  OR: [ArrowScalarWhereInput!]
+  NOT: [ArrowScalarWhereInput!]
+}
+
+input EpisodeUpsertNestedInput {
+  update: EpisodeUpdateDataInput!
+  create: EpisodeCreateInput!
+}
+
+input UserUpdateOneRequiredWithoutBoardsInput {
+  create: UserCreateWithoutBoardsInput
+  update: UserUpdateWithoutBoardsDataInput
+  upsert: UserUpsertWithoutBoardsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutBoardsDataInput {
+  nickName: String
+  gender: Gender
+  age: Int
+}
+
+input UserUpsertWithoutBoardsInput {
+  update: UserUpdateWithoutBoardsDataInput!
+  create: UserCreateWithoutBoardsInput!
+}
+
+input BoardUpsertWithoutArrowsInput {
+  update: BoardUpdateWithoutArrowsDataInput!
+  create: BoardCreateWithoutArrowsInput!
+}
+
+type BatchPayload {
+  count: Long!
+}
+
+scalar Long
+
+input BoardCreateInput {
+  id: ID
+  episode: EpisodeCreateOneInput!
+  owner: UserCreateOneWithoutBoardsInput!
+  arrows: ArrowCreateManyWithoutBoardInput
+}
+
+input ArrowCreateManyWithoutBoardInput {
+  create: [ArrowCreateWithoutBoardInput!]
+  connect: [ArrowWhereUniqueInput!]
+}
+
+input ArrowCreateWithoutBoardInput {
+  id: ID
+  from: LoverCreateOneInput!
+  to: LoverCreateOneInput!
+}
+
+input BoardUpdateInput {
+  episode: EpisodeUpdateOneRequiredInput
+  owner: UserUpdateOneRequiredWithoutBoardsInput
+  arrows: ArrowUpdateManyWithoutBoardInput
+}
+
+input ArrowUpdateManyWithoutBoardInput {
+  create: [ArrowCreateWithoutBoardInput!]
+  delete: [ArrowWhereUniqueInput!]
+  connect: [ArrowWhereUniqueInput!]
+  set: [ArrowWhereUniqueInput!]
+  disconnect: [ArrowWhereUniqueInput!]
+  update: [ArrowUpdateWithWhereUniqueWithoutBoardInput!]
+  upsert: [ArrowUpsertWithWhereUniqueWithoutBoardInput!]
+  deleteMany: [ArrowScalarWhereInput!]
+}
+
+input ArrowUpdateWithWhereUniqueWithoutBoardInput {
+  where: ArrowWhereUniqueInput!
+  data: ArrowUpdateWithoutBoardDataInput!
+}
+
+input ArrowUpdateWithoutBoardDataInput {
+  from: LoverUpdateOneRequiredInput
+  to: LoverUpdateOneRequiredInput
+}
+
+input ArrowUpsertWithWhereUniqueWithoutBoardInput {
+  where: ArrowWhereUniqueInput!
+  update: ArrowUpdateWithoutBoardDataInput!
+  create: ArrowCreateWithoutBoardInput!
+}
+
+input EpisodeUpdateInput {
+  number: Int
+  season: Int
+  arrows: ArrowUpdateManyInput
+}
+
+input EpisodeUpdateManyMutationInput {
+  number: Int
+  season: Int
+}
+
+input LoverUpdateInput {
+  name: String
+  gender: Gender
+  season: Int
+  firstEpNum: Int
+  image: String
+  description: String
+  age: Int
+  job: String
+}
+
+input LoverUpdateManyMutationInput {
+  name: String
+  gender: Gender
+  season: Int
+  firstEpNum: Int
+  image: String
+  description: String
+  age: Int
+  job: String
+}
+
+input UserCreateInput {
+  id: ID
+  nickName: String!
+  gender: Gender!
+  age: Int!
+  boards: BoardCreateManyWithoutOwnerInput
+}
+
+input BoardCreateManyWithoutOwnerInput {
+  create: [BoardCreateWithoutOwnerInput!]
+  connect: [BoardWhereUniqueInput!]
+}
+
+input BoardCreateWithoutOwnerInput {
+  id: ID
+  episode: EpisodeCreateOneInput!
+  arrows: ArrowCreateManyWithoutBoardInput
+}
+
+input UserUpdateInput {
+  nickName: String
+  gender: Gender
+  age: Int
+  boards: BoardUpdateManyWithoutOwnerInput
+}
+
+input BoardUpdateManyWithoutOwnerInput {
+  create: [BoardCreateWithoutOwnerInput!]
+  delete: [BoardWhereUniqueInput!]
+  connect: [BoardWhereUniqueInput!]
+  set: [BoardWhereUniqueInput!]
+  disconnect: [BoardWhereUniqueInput!]
+  update: [BoardUpdateWithWhereUniqueWithoutOwnerInput!]
+  upsert: [BoardUpsertWithWhereUniqueWithoutOwnerInput!]
+  deleteMany: [BoardScalarWhereInput!]
+}
+
+input BoardUpdateWithWhereUniqueWithoutOwnerInput {
+  where: BoardWhereUniqueInput!
+  data: BoardUpdateWithoutOwnerDataInput!
+}
+
+input BoardUpdateWithoutOwnerDataInput {
+  episode: EpisodeUpdateOneRequiredInput
+  arrows: ArrowUpdateManyWithoutBoardInput
+}
+
+input BoardUpsertWithWhereUniqueWithoutOwnerInput {
+  where: BoardWhereUniqueInput!
+  update: BoardUpdateWithoutOwnerDataInput!
+  create: BoardCreateWithoutOwnerInput!
+}
+
+input BoardScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [BoardScalarWhereInput!]
+  OR: [BoardScalarWhereInput!]
+  NOT: [BoardScalarWhereInput!]
+}
+
+input UserUpdateManyMutationInput {
+  nickName: String
+  gender: Gender
+  age: Int
+}
+
+type Subscription {
+  arrow(where: ArrowSubscriptionWhereInput): ArrowSubscriptionPayload
+  board(where: BoardSubscriptionWhereInput): BoardSubscriptionPayload
+  episode(where: EpisodeSubscriptionWhereInput): EpisodeSubscriptionPayload
+  lover(where: LoverSubscriptionWhereInput): LoverSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+}
+
+type ArrowSubscriptionPayload {
+  mutation: MutationType!
+  node: Arrow
+  updatedFields: [String!]
+  previousValues: ArrowPreviousValues
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+type ArrowPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input ArrowSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ArrowWhereInput
+  AND: [ArrowSubscriptionWhereInput!]
+  OR: [ArrowSubscriptionWhereInput!]
+  NOT: [ArrowSubscriptionWhereInput!]
+}
+
+type BoardSubscriptionPayload {
+  mutation: MutationType!
+  node: Board
+  updatedFields: [String!]
+  previousValues: BoardPreviousValues
+}
+
+type BoardPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input BoardSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: BoardWhereInput
+  AND: [BoardSubscriptionWhereInput!]
+  OR: [BoardSubscriptionWhereInput!]
+  NOT: [BoardSubscriptionWhereInput!]
+}
+
+type EpisodeSubscriptionPayload {
+  mutation: MutationType!
+  node: Episode
+  updatedFields: [String!]
+  previousValues: EpisodePreviousValues
+}
+
+type EpisodePreviousValues {
+  id: ID!
+  number: Int!
+  season: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input EpisodeSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: EpisodeWhereInput
+  AND: [EpisodeSubscriptionWhereInput!]
+  OR: [EpisodeSubscriptionWhereInput!]
+  NOT: [EpisodeSubscriptionWhereInput!]
+}
+
+type LoverSubscriptionPayload {
+  mutation: MutationType!
+  node: Lover
+  updatedFields: [String!]
+  previousValues: LoverPreviousValues
+}
+
+type LoverPreviousValues {
+  id: ID!
+  name: String!
+  gender: Gender!
+  season: Int!
+  firstEpNum: Int!
+  image: String
+  description: String
+  age: Int
+  job: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input LoverSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: LoverWhereInput
+  AND: [LoverSubscriptionWhereInput!]
+  OR: [LoverSubscriptionWhereInput!]
+  NOT: [LoverSubscriptionWhereInput!]
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+type UserPreviousValues {
+  id: ID!
+  nickName: String!
+  gender: Gender!
+  age: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input UserSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+  AND: [UserSubscriptionWhereInput!]
+  OR: [UserSubscriptionWhereInput!]
+  NOT: [UserSubscriptionWhereInput!]
 }
 `

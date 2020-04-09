@@ -16,6 +16,10 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
+  arrow: (where?: ArrowWhereInput) => Promise<boolean>;
+  board: (where?: BoardWhereInput) => Promise<boolean>;
+  episode: (where?: EpisodeWhereInput) => Promise<boolean>;
+  lover: (where?: LoverWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
@@ -38,6 +42,82 @@ export interface Prisma {
    * Queries
    */
 
+  arrow: (where: ArrowWhereUniqueInput) => ArrowNullablePromise;
+  arrows: (args?: {
+    where?: ArrowWhereInput;
+    orderBy?: ArrowOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Arrow>;
+  arrowsConnection: (args?: {
+    where?: ArrowWhereInput;
+    orderBy?: ArrowOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => ArrowConnectionPromise;
+  board: (where: BoardWhereUniqueInput) => BoardNullablePromise;
+  boards: (args?: {
+    where?: BoardWhereInput;
+    orderBy?: BoardOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Board>;
+  boardsConnection: (args?: {
+    where?: BoardWhereInput;
+    orderBy?: BoardOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => BoardConnectionPromise;
+  episode: (where: EpisodeWhereUniqueInput) => EpisodeNullablePromise;
+  episodes: (args?: {
+    where?: EpisodeWhereInput;
+    orderBy?: EpisodeOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Episode>;
+  episodesConnection: (args?: {
+    where?: EpisodeWhereInput;
+    orderBy?: EpisodeOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => EpisodeConnectionPromise;
+  lover: (where: LoverWhereUniqueInput) => LoverNullablePromise;
+  lovers: (args?: {
+    where?: LoverWhereInput;
+    orderBy?: LoverOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Lover>;
+  loversConnection: (args?: {
+    where?: LoverWhereInput;
+    orderBy?: LoverOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => LoverConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserNullablePromise;
   users: (args?: {
     where?: UserWhereInput;
@@ -63,6 +143,62 @@ export interface Prisma {
    * Mutations
    */
 
+  createArrow: (data: ArrowCreateInput) => ArrowPromise;
+  updateArrow: (args: {
+    data: ArrowUpdateInput;
+    where: ArrowWhereUniqueInput;
+  }) => ArrowPromise;
+  upsertArrow: (args: {
+    where: ArrowWhereUniqueInput;
+    create: ArrowCreateInput;
+    update: ArrowUpdateInput;
+  }) => ArrowPromise;
+  deleteArrow: (where: ArrowWhereUniqueInput) => ArrowPromise;
+  deleteManyArrows: (where?: ArrowWhereInput) => BatchPayloadPromise;
+  createBoard: (data: BoardCreateInput) => BoardPromise;
+  updateBoard: (args: {
+    data: BoardUpdateInput;
+    where: BoardWhereUniqueInput;
+  }) => BoardPromise;
+  upsertBoard: (args: {
+    where: BoardWhereUniqueInput;
+    create: BoardCreateInput;
+    update: BoardUpdateInput;
+  }) => BoardPromise;
+  deleteBoard: (where: BoardWhereUniqueInput) => BoardPromise;
+  deleteManyBoards: (where?: BoardWhereInput) => BatchPayloadPromise;
+  createEpisode: (data: EpisodeCreateInput) => EpisodePromise;
+  updateEpisode: (args: {
+    data: EpisodeUpdateInput;
+    where: EpisodeWhereUniqueInput;
+  }) => EpisodePromise;
+  updateManyEpisodes: (args: {
+    data: EpisodeUpdateManyMutationInput;
+    where?: EpisodeWhereInput;
+  }) => BatchPayloadPromise;
+  upsertEpisode: (args: {
+    where: EpisodeWhereUniqueInput;
+    create: EpisodeCreateInput;
+    update: EpisodeUpdateInput;
+  }) => EpisodePromise;
+  deleteEpisode: (where: EpisodeWhereUniqueInput) => EpisodePromise;
+  deleteManyEpisodes: (where?: EpisodeWhereInput) => BatchPayloadPromise;
+  createLover: (data: LoverCreateInput) => LoverPromise;
+  updateLover: (args: {
+    data: LoverUpdateInput;
+    where: LoverWhereUniqueInput;
+  }) => LoverPromise;
+  updateManyLovers: (args: {
+    data: LoverUpdateManyMutationInput;
+    where?: LoverWhereInput;
+  }) => BatchPayloadPromise;
+  upsertLover: (args: {
+    where: LoverWhereUniqueInput;
+    create: LoverCreateInput;
+    update: LoverUpdateInput;
+  }) => LoverPromise;
+  deleteLover: (where: LoverWhereUniqueInput) => LoverPromise;
+  deleteManyLovers: (where?: LoverWhereInput) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (args: {
     data: UserUpdateInput;
@@ -88,6 +224,18 @@ export interface Prisma {
 }
 
 export interface Subscription {
+  arrow: (
+    where?: ArrowSubscriptionWhereInput
+  ) => ArrowSubscriptionPayloadSubscription;
+  board: (
+    where?: BoardSubscriptionWhereInput
+  ) => BoardSubscriptionPayloadSubscription;
+  episode: (
+    where?: EpisodeSubscriptionWhereInput
+  ) => EpisodeSubscriptionPayloadSubscription;
+  lover: (
+    where?: LoverSubscriptionWhereInput
+  ) => LoverSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -101,15 +249,277 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type UserOrderByInput = "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC";
+export type Gender = "MALE" | "FEMALE";
+
+export type ArrowOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type BoardOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type EpisodeOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "number_ASC"
+  | "number_DESC"
+  | "season_ASC"
+  | "season_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type LoverOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "gender_ASC"
+  | "gender_DESC"
+  | "season_ASC"
+  | "season_DESC"
+  | "firstEpNum_ASC"
+  | "firstEpNum_DESC"
+  | "image_ASC"
+  | "image_DESC"
+  | "description_ASC"
+  | "description_DESC"
+  | "age_ASC"
+  | "age_DESC"
+  | "job_ASC"
+  | "job_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type UserOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "nickName_ASC"
+  | "nickName_DESC"
+  | "gender_ASC"
+  | "gender_DESC"
+  | "age_ASC"
+  | "age_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
+export interface ArrowWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  board?: Maybe<BoardWhereInput>;
+  from?: Maybe<LoverWhereInput>;
+  to?: Maybe<LoverWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<ArrowWhereInput[] | ArrowWhereInput>;
+  OR?: Maybe<ArrowWhereInput[] | ArrowWhereInput>;
+  NOT?: Maybe<ArrowWhereInput[] | ArrowWhereInput>;
+}
+
+export interface BoardWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  episode?: Maybe<EpisodeWhereInput>;
+  owner?: Maybe<UserWhereInput>;
+  arrows_every?: Maybe<ArrowWhereInput>;
+  arrows_some?: Maybe<ArrowWhereInput>;
+  arrows_none?: Maybe<ArrowWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<BoardWhereInput[] | BoardWhereInput>;
+  OR?: Maybe<BoardWhereInput[] | BoardWhereInput>;
+  NOT?: Maybe<BoardWhereInput[] | BoardWhereInput>;
+}
+
+export interface EpisodeWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  number?: Maybe<Int>;
+  number_not?: Maybe<Int>;
+  number_in?: Maybe<Int[] | Int>;
+  number_not_in?: Maybe<Int[] | Int>;
+  number_lt?: Maybe<Int>;
+  number_lte?: Maybe<Int>;
+  number_gt?: Maybe<Int>;
+  number_gte?: Maybe<Int>;
+  season?: Maybe<Int>;
+  season_not?: Maybe<Int>;
+  season_in?: Maybe<Int[] | Int>;
+  season_not_in?: Maybe<Int[] | Int>;
+  season_lt?: Maybe<Int>;
+  season_lte?: Maybe<Int>;
+  season_gt?: Maybe<Int>;
+  season_gte?: Maybe<Int>;
+  arrows_every?: Maybe<ArrowWhereInput>;
+  arrows_some?: Maybe<ArrowWhereInput>;
+  arrows_none?: Maybe<ArrowWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<EpisodeWhereInput[] | EpisodeWhereInput>;
+  OR?: Maybe<EpisodeWhereInput[] | EpisodeWhereInput>;
+  NOT?: Maybe<EpisodeWhereInput[] | EpisodeWhereInput>;
+}
 
 export interface UserWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  nickName?: Maybe<String>;
+  nickName_not?: Maybe<String>;
+  nickName_in?: Maybe<String[] | String>;
+  nickName_not_in?: Maybe<String[] | String>;
+  nickName_lt?: Maybe<String>;
+  nickName_lte?: Maybe<String>;
+  nickName_gt?: Maybe<String>;
+  nickName_gte?: Maybe<String>;
+  nickName_contains?: Maybe<String>;
+  nickName_not_contains?: Maybe<String>;
+  nickName_starts_with?: Maybe<String>;
+  nickName_not_starts_with?: Maybe<String>;
+  nickName_ends_with?: Maybe<String>;
+  nickName_not_ends_with?: Maybe<String>;
+  gender?: Maybe<Gender>;
+  gender_not?: Maybe<Gender>;
+  gender_in?: Maybe<Gender[] | Gender>;
+  gender_not_in?: Maybe<Gender[] | Gender>;
+  age?: Maybe<Int>;
+  age_not?: Maybe<Int>;
+  age_in?: Maybe<Int[] | Int>;
+  age_not_in?: Maybe<Int[] | Int>;
+  age_lt?: Maybe<Int>;
+  age_lte?: Maybe<Int>;
+  age_gt?: Maybe<Int>;
+  age_gte?: Maybe<Int>;
+  boards_every?: Maybe<BoardWhereInput>;
+  boards_some?: Maybe<BoardWhereInput>;
+  boards_none?: Maybe<BoardWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<UserWhereInput[] | UserWhereInput>;
+  OR?: Maybe<UserWhereInput[] | UserWhereInput>;
+  NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
+}
+
+export interface LoverWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -138,22 +548,568 @@ export interface UserWhereInput {
   name_not_starts_with?: Maybe<String>;
   name_ends_with?: Maybe<String>;
   name_not_ends_with?: Maybe<String>;
-  AND?: Maybe<UserWhereInput[] | UserWhereInput>;
-  OR?: Maybe<UserWhereInput[] | UserWhereInput>;
-  NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
+  gender?: Maybe<Gender>;
+  gender_not?: Maybe<Gender>;
+  gender_in?: Maybe<Gender[] | Gender>;
+  gender_not_in?: Maybe<Gender[] | Gender>;
+  season?: Maybe<Int>;
+  season_not?: Maybe<Int>;
+  season_in?: Maybe<Int[] | Int>;
+  season_not_in?: Maybe<Int[] | Int>;
+  season_lt?: Maybe<Int>;
+  season_lte?: Maybe<Int>;
+  season_gt?: Maybe<Int>;
+  season_gte?: Maybe<Int>;
+  firstEpNum?: Maybe<Int>;
+  firstEpNum_not?: Maybe<Int>;
+  firstEpNum_in?: Maybe<Int[] | Int>;
+  firstEpNum_not_in?: Maybe<Int[] | Int>;
+  firstEpNum_lt?: Maybe<Int>;
+  firstEpNum_lte?: Maybe<Int>;
+  firstEpNum_gt?: Maybe<Int>;
+  firstEpNum_gte?: Maybe<Int>;
+  image?: Maybe<String>;
+  image_not?: Maybe<String>;
+  image_in?: Maybe<String[] | String>;
+  image_not_in?: Maybe<String[] | String>;
+  image_lt?: Maybe<String>;
+  image_lte?: Maybe<String>;
+  image_gt?: Maybe<String>;
+  image_gte?: Maybe<String>;
+  image_contains?: Maybe<String>;
+  image_not_contains?: Maybe<String>;
+  image_starts_with?: Maybe<String>;
+  image_not_starts_with?: Maybe<String>;
+  image_ends_with?: Maybe<String>;
+  image_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  age?: Maybe<Int>;
+  age_not?: Maybe<Int>;
+  age_in?: Maybe<Int[] | Int>;
+  age_not_in?: Maybe<Int[] | Int>;
+  age_lt?: Maybe<Int>;
+  age_lte?: Maybe<Int>;
+  age_gt?: Maybe<Int>;
+  age_gte?: Maybe<Int>;
+  job?: Maybe<String>;
+  job_not?: Maybe<String>;
+  job_in?: Maybe<String[] | String>;
+  job_not_in?: Maybe<String[] | String>;
+  job_lt?: Maybe<String>;
+  job_lte?: Maybe<String>;
+  job_gt?: Maybe<String>;
+  job_gte?: Maybe<String>;
+  job_contains?: Maybe<String>;
+  job_not_contains?: Maybe<String>;
+  job_starts_with?: Maybe<String>;
+  job_not_starts_with?: Maybe<String>;
+  job_ends_with?: Maybe<String>;
+  job_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<LoverWhereInput[] | LoverWhereInput>;
+  OR?: Maybe<LoverWhereInput[] | LoverWhereInput>;
+  NOT?: Maybe<LoverWhereInput[] | LoverWhereInput>;
+}
+
+export type ArrowWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export type BoardWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export type EpisodeWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export type LoverWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface ArrowCreateInput {
+  id?: Maybe<ID_Input>;
+  board?: Maybe<BoardCreateOneWithoutArrowsInput>;
+  from: LoverCreateOneInput;
+  to: LoverCreateOneInput;
+}
+
+export interface BoardCreateOneWithoutArrowsInput {
+  create?: Maybe<BoardCreateWithoutArrowsInput>;
+  connect?: Maybe<BoardWhereUniqueInput>;
+}
+
+export interface BoardCreateWithoutArrowsInput {
+  id?: Maybe<ID_Input>;
+  episode: EpisodeCreateOneInput;
+  owner: UserCreateOneWithoutBoardsInput;
+}
+
+export interface EpisodeCreateOneInput {
+  create?: Maybe<EpisodeCreateInput>;
+  connect?: Maybe<EpisodeWhereUniqueInput>;
+}
+
+export interface EpisodeCreateInput {
+  id?: Maybe<ID_Input>;
+  number: Int;
+  season: Int;
+  arrows?: Maybe<ArrowCreateManyInput>;
+}
+
+export interface ArrowCreateManyInput {
+  create?: Maybe<ArrowCreateInput[] | ArrowCreateInput>;
+  connect?: Maybe<ArrowWhereUniqueInput[] | ArrowWhereUniqueInput>;
+}
+
+export interface UserCreateOneWithoutBoardsInput {
+  create?: Maybe<UserCreateWithoutBoardsInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserCreateWithoutBoardsInput {
+  id?: Maybe<ID_Input>;
+  nickName: String;
+  gender: Gender;
+  age: Int;
+}
+
+export interface LoverCreateOneInput {
+  create?: Maybe<LoverCreateInput>;
+  connect?: Maybe<LoverWhereUniqueInput>;
+}
+
+export interface LoverCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  gender: Gender;
+  season: Int;
+  firstEpNum: Int;
+  image?: Maybe<String>;
+  description?: Maybe<String>;
+  age?: Maybe<Int>;
+  job?: Maybe<String>;
+}
+
+export interface ArrowUpdateInput {
+  board?: Maybe<BoardUpdateOneWithoutArrowsInput>;
+  from?: Maybe<LoverUpdateOneRequiredInput>;
+  to?: Maybe<LoverUpdateOneRequiredInput>;
+}
+
+export interface BoardUpdateOneWithoutArrowsInput {
+  create?: Maybe<BoardCreateWithoutArrowsInput>;
+  update?: Maybe<BoardUpdateWithoutArrowsDataInput>;
+  upsert?: Maybe<BoardUpsertWithoutArrowsInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<BoardWhereUniqueInput>;
+}
+
+export interface BoardUpdateWithoutArrowsDataInput {
+  episode?: Maybe<EpisodeUpdateOneRequiredInput>;
+  owner?: Maybe<UserUpdateOneRequiredWithoutBoardsInput>;
+}
+
+export interface EpisodeUpdateOneRequiredInput {
+  create?: Maybe<EpisodeCreateInput>;
+  update?: Maybe<EpisodeUpdateDataInput>;
+  upsert?: Maybe<EpisodeUpsertNestedInput>;
+  connect?: Maybe<EpisodeWhereUniqueInput>;
+}
+
+export interface EpisodeUpdateDataInput {
+  number?: Maybe<Int>;
+  season?: Maybe<Int>;
+  arrows?: Maybe<ArrowUpdateManyInput>;
+}
+
+export interface ArrowUpdateManyInput {
+  create?: Maybe<ArrowCreateInput[] | ArrowCreateInput>;
+  update?: Maybe<
+    | ArrowUpdateWithWhereUniqueNestedInput[]
+    | ArrowUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | ArrowUpsertWithWhereUniqueNestedInput[]
+    | ArrowUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<ArrowWhereUniqueInput[] | ArrowWhereUniqueInput>;
+  connect?: Maybe<ArrowWhereUniqueInput[] | ArrowWhereUniqueInput>;
+  set?: Maybe<ArrowWhereUniqueInput[] | ArrowWhereUniqueInput>;
+  disconnect?: Maybe<ArrowWhereUniqueInput[] | ArrowWhereUniqueInput>;
+  deleteMany?: Maybe<ArrowScalarWhereInput[] | ArrowScalarWhereInput>;
+}
+
+export interface ArrowUpdateWithWhereUniqueNestedInput {
+  where: ArrowWhereUniqueInput;
+  data: ArrowUpdateDataInput;
+}
+
+export interface ArrowUpdateDataInput {
+  board?: Maybe<BoardUpdateOneWithoutArrowsInput>;
+  from?: Maybe<LoverUpdateOneRequiredInput>;
+  to?: Maybe<LoverUpdateOneRequiredInput>;
+}
+
+export interface LoverUpdateOneRequiredInput {
+  create?: Maybe<LoverCreateInput>;
+  update?: Maybe<LoverUpdateDataInput>;
+  upsert?: Maybe<LoverUpsertNestedInput>;
+  connect?: Maybe<LoverWhereUniqueInput>;
+}
+
+export interface LoverUpdateDataInput {
+  name?: Maybe<String>;
+  gender?: Maybe<Gender>;
+  season?: Maybe<Int>;
+  firstEpNum?: Maybe<Int>;
+  image?: Maybe<String>;
+  description?: Maybe<String>;
+  age?: Maybe<Int>;
+  job?: Maybe<String>;
+}
+
+export interface LoverUpsertNestedInput {
+  update: LoverUpdateDataInput;
+  create: LoverCreateInput;
+}
+
+export interface ArrowUpsertWithWhereUniqueNestedInput {
+  where: ArrowWhereUniqueInput;
+  update: ArrowUpdateDataInput;
+  create: ArrowCreateInput;
+}
+
+export interface ArrowScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<ArrowScalarWhereInput[] | ArrowScalarWhereInput>;
+  OR?: Maybe<ArrowScalarWhereInput[] | ArrowScalarWhereInput>;
+  NOT?: Maybe<ArrowScalarWhereInput[] | ArrowScalarWhereInput>;
+}
+
+export interface EpisodeUpsertNestedInput {
+  update: EpisodeUpdateDataInput;
+  create: EpisodeCreateInput;
+}
+
+export interface UserUpdateOneRequiredWithoutBoardsInput {
+  create?: Maybe<UserCreateWithoutBoardsInput>;
+  update?: Maybe<UserUpdateWithoutBoardsDataInput>;
+  upsert?: Maybe<UserUpsertWithoutBoardsInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserUpdateWithoutBoardsDataInput {
+  nickName?: Maybe<String>;
+  gender?: Maybe<Gender>;
+  age?: Maybe<Int>;
+}
+
+export interface UserUpsertWithoutBoardsInput {
+  update: UserUpdateWithoutBoardsDataInput;
+  create: UserCreateWithoutBoardsInput;
+}
+
+export interface BoardUpsertWithoutArrowsInput {
+  update: BoardUpdateWithoutArrowsDataInput;
+  create: BoardCreateWithoutArrowsInput;
+}
+
+export interface BoardCreateInput {
+  id?: Maybe<ID_Input>;
+  episode: EpisodeCreateOneInput;
+  owner: UserCreateOneWithoutBoardsInput;
+  arrows?: Maybe<ArrowCreateManyWithoutBoardInput>;
+}
+
+export interface ArrowCreateManyWithoutBoardInput {
+  create?: Maybe<ArrowCreateWithoutBoardInput[] | ArrowCreateWithoutBoardInput>;
+  connect?: Maybe<ArrowWhereUniqueInput[] | ArrowWhereUniqueInput>;
+}
+
+export interface ArrowCreateWithoutBoardInput {
+  id?: Maybe<ID_Input>;
+  from: LoverCreateOneInput;
+  to: LoverCreateOneInput;
+}
+
+export interface BoardUpdateInput {
+  episode?: Maybe<EpisodeUpdateOneRequiredInput>;
+  owner?: Maybe<UserUpdateOneRequiredWithoutBoardsInput>;
+  arrows?: Maybe<ArrowUpdateManyWithoutBoardInput>;
+}
+
+export interface ArrowUpdateManyWithoutBoardInput {
+  create?: Maybe<ArrowCreateWithoutBoardInput[] | ArrowCreateWithoutBoardInput>;
+  delete?: Maybe<ArrowWhereUniqueInput[] | ArrowWhereUniqueInput>;
+  connect?: Maybe<ArrowWhereUniqueInput[] | ArrowWhereUniqueInput>;
+  set?: Maybe<ArrowWhereUniqueInput[] | ArrowWhereUniqueInput>;
+  disconnect?: Maybe<ArrowWhereUniqueInput[] | ArrowWhereUniqueInput>;
+  update?: Maybe<
+    | ArrowUpdateWithWhereUniqueWithoutBoardInput[]
+    | ArrowUpdateWithWhereUniqueWithoutBoardInput
+  >;
+  upsert?: Maybe<
+    | ArrowUpsertWithWhereUniqueWithoutBoardInput[]
+    | ArrowUpsertWithWhereUniqueWithoutBoardInput
+  >;
+  deleteMany?: Maybe<ArrowScalarWhereInput[] | ArrowScalarWhereInput>;
+}
+
+export interface ArrowUpdateWithWhereUniqueWithoutBoardInput {
+  where: ArrowWhereUniqueInput;
+  data: ArrowUpdateWithoutBoardDataInput;
+}
+
+export interface ArrowUpdateWithoutBoardDataInput {
+  from?: Maybe<LoverUpdateOneRequiredInput>;
+  to?: Maybe<LoverUpdateOneRequiredInput>;
+}
+
+export interface ArrowUpsertWithWhereUniqueWithoutBoardInput {
+  where: ArrowWhereUniqueInput;
+  update: ArrowUpdateWithoutBoardDataInput;
+  create: ArrowCreateWithoutBoardInput;
+}
+
+export interface EpisodeUpdateInput {
+  number?: Maybe<Int>;
+  season?: Maybe<Int>;
+  arrows?: Maybe<ArrowUpdateManyInput>;
+}
+
+export interface EpisodeUpdateManyMutationInput {
+  number?: Maybe<Int>;
+  season?: Maybe<Int>;
+}
+
+export interface LoverUpdateInput {
+  name?: Maybe<String>;
+  gender?: Maybe<Gender>;
+  season?: Maybe<Int>;
+  firstEpNum?: Maybe<Int>;
+  image?: Maybe<String>;
+  description?: Maybe<String>;
+  age?: Maybe<Int>;
+  job?: Maybe<String>;
+}
+
+export interface LoverUpdateManyMutationInput {
+  name?: Maybe<String>;
+  gender?: Maybe<Gender>;
+  season?: Maybe<Int>;
+  firstEpNum?: Maybe<Int>;
+  image?: Maybe<String>;
+  description?: Maybe<String>;
+  age?: Maybe<Int>;
+  job?: Maybe<String>;
 }
 
 export interface UserCreateInput {
   id?: Maybe<ID_Input>;
-  name: String;
+  nickName: String;
+  gender: Gender;
+  age: Int;
+  boards?: Maybe<BoardCreateManyWithoutOwnerInput>;
+}
+
+export interface BoardCreateManyWithoutOwnerInput {
+  create?: Maybe<BoardCreateWithoutOwnerInput[] | BoardCreateWithoutOwnerInput>;
+  connect?: Maybe<BoardWhereUniqueInput[] | BoardWhereUniqueInput>;
+}
+
+export interface BoardCreateWithoutOwnerInput {
+  id?: Maybe<ID_Input>;
+  episode: EpisodeCreateOneInput;
+  arrows?: Maybe<ArrowCreateManyWithoutBoardInput>;
 }
 
 export interface UserUpdateInput {
-  name?: Maybe<String>;
+  nickName?: Maybe<String>;
+  gender?: Maybe<Gender>;
+  age?: Maybe<Int>;
+  boards?: Maybe<BoardUpdateManyWithoutOwnerInput>;
+}
+
+export interface BoardUpdateManyWithoutOwnerInput {
+  create?: Maybe<BoardCreateWithoutOwnerInput[] | BoardCreateWithoutOwnerInput>;
+  delete?: Maybe<BoardWhereUniqueInput[] | BoardWhereUniqueInput>;
+  connect?: Maybe<BoardWhereUniqueInput[] | BoardWhereUniqueInput>;
+  set?: Maybe<BoardWhereUniqueInput[] | BoardWhereUniqueInput>;
+  disconnect?: Maybe<BoardWhereUniqueInput[] | BoardWhereUniqueInput>;
+  update?: Maybe<
+    | BoardUpdateWithWhereUniqueWithoutOwnerInput[]
+    | BoardUpdateWithWhereUniqueWithoutOwnerInput
+  >;
+  upsert?: Maybe<
+    | BoardUpsertWithWhereUniqueWithoutOwnerInput[]
+    | BoardUpsertWithWhereUniqueWithoutOwnerInput
+  >;
+  deleteMany?: Maybe<BoardScalarWhereInput[] | BoardScalarWhereInput>;
+}
+
+export interface BoardUpdateWithWhereUniqueWithoutOwnerInput {
+  where: BoardWhereUniqueInput;
+  data: BoardUpdateWithoutOwnerDataInput;
+}
+
+export interface BoardUpdateWithoutOwnerDataInput {
+  episode?: Maybe<EpisodeUpdateOneRequiredInput>;
+  arrows?: Maybe<ArrowUpdateManyWithoutBoardInput>;
+}
+
+export interface BoardUpsertWithWhereUniqueWithoutOwnerInput {
+  where: BoardWhereUniqueInput;
+  update: BoardUpdateWithoutOwnerDataInput;
+  create: BoardCreateWithoutOwnerInput;
+}
+
+export interface BoardScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<BoardScalarWhereInput[] | BoardScalarWhereInput>;
+  OR?: Maybe<BoardScalarWhereInput[] | BoardScalarWhereInput>;
+  NOT?: Maybe<BoardScalarWhereInput[] | BoardScalarWhereInput>;
 }
 
 export interface UserUpdateManyMutationInput {
-  name?: Maybe<String>;
+  nickName?: Maybe<String>;
+  gender?: Maybe<Gender>;
+  age?: Maybe<Int>;
+}
+
+export interface ArrowSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ArrowWhereInput>;
+  AND?: Maybe<ArrowSubscriptionWhereInput[] | ArrowSubscriptionWhereInput>;
+  OR?: Maybe<ArrowSubscriptionWhereInput[] | ArrowSubscriptionWhereInput>;
+  NOT?: Maybe<ArrowSubscriptionWhereInput[] | ArrowSubscriptionWhereInput>;
+}
+
+export interface BoardSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<BoardWhereInput>;
+  AND?: Maybe<BoardSubscriptionWhereInput[] | BoardSubscriptionWhereInput>;
+  OR?: Maybe<BoardSubscriptionWhereInput[] | BoardSubscriptionWhereInput>;
+  NOT?: Maybe<BoardSubscriptionWhereInput[] | BoardSubscriptionWhereInput>;
+}
+
+export interface EpisodeSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<EpisodeWhereInput>;
+  AND?: Maybe<EpisodeSubscriptionWhereInput[] | EpisodeSubscriptionWhereInput>;
+  OR?: Maybe<EpisodeSubscriptionWhereInput[] | EpisodeSubscriptionWhereInput>;
+  NOT?: Maybe<EpisodeSubscriptionWhereInput[] | EpisodeSubscriptionWhereInput>;
+}
+
+export interface LoverSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<LoverWhereInput>;
+  AND?: Maybe<LoverSubscriptionWhereInput[] | LoverSubscriptionWhereInput>;
+  OR?: Maybe<LoverSubscriptionWhereInput[] | LoverSubscriptionWhereInput>;
+  NOT?: Maybe<LoverSubscriptionWhereInput[] | LoverSubscriptionWhereInput>;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -171,49 +1127,313 @@ export interface NodeNode {
   id: ID_Output;
 }
 
+export interface Arrow {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface ArrowPromise extends Promise<Arrow>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  board: <T = BoardPromise>() => T;
+  from: <T = LoverPromise>() => T;
+  to: <T = LoverPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ArrowSubscription
+  extends Promise<AsyncIterator<Arrow>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  board: <T = BoardSubscription>() => T;
+  from: <T = LoverSubscription>() => T;
+  to: <T = LoverSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface ArrowNullablePromise
+  extends Promise<Arrow | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  board: <T = BoardPromise>() => T;
+  from: <T = LoverPromise>() => T;
+  to: <T = LoverPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface Board {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface BoardPromise extends Promise<Board>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  episode: <T = EpisodePromise>() => T;
+  owner: <T = UserPromise>() => T;
+  arrows: <T = FragmentableArray<Arrow>>(args?: {
+    where?: ArrowWhereInput;
+    orderBy?: ArrowOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface BoardSubscription
+  extends Promise<AsyncIterator<Board>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  episode: <T = EpisodeSubscription>() => T;
+  owner: <T = UserSubscription>() => T;
+  arrows: <T = Promise<AsyncIterator<ArrowSubscription>>>(args?: {
+    where?: ArrowWhereInput;
+    orderBy?: ArrowOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface BoardNullablePromise
+  extends Promise<Board | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  episode: <T = EpisodePromise>() => T;
+  owner: <T = UserPromise>() => T;
+  arrows: <T = FragmentableArray<Arrow>>(args?: {
+    where?: ArrowWhereInput;
+    orderBy?: ArrowOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface Episode {
+  id: ID_Output;
+  number: Int;
+  season: Int;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface EpisodePromise extends Promise<Episode>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  number: () => Promise<Int>;
+  season: () => Promise<Int>;
+  arrows: <T = FragmentableArray<Arrow>>(args?: {
+    where?: ArrowWhereInput;
+    orderBy?: ArrowOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface EpisodeSubscription
+  extends Promise<AsyncIterator<Episode>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  number: () => Promise<AsyncIterator<Int>>;
+  season: () => Promise<AsyncIterator<Int>>;
+  arrows: <T = Promise<AsyncIterator<ArrowSubscription>>>(args?: {
+    where?: ArrowWhereInput;
+    orderBy?: ArrowOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface EpisodeNullablePromise
+  extends Promise<Episode | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  number: () => Promise<Int>;
+  season: () => Promise<Int>;
+  arrows: <T = FragmentableArray<Arrow>>(args?: {
+    where?: ArrowWhereInput;
+    orderBy?: ArrowOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
 export interface User {
   id: ID_Output;
-  name: String;
+  nickName: String;
+  gender: Gender;
+  age: Int;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
+  nickName: () => Promise<String>;
+  gender: () => Promise<Gender>;
+  age: () => Promise<Int>;
+  boards: <T = FragmentableArray<Board>>(args?: {
+    where?: BoardWhereInput;
+    orderBy?: BoardOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface UserSubscription
   extends Promise<AsyncIterator<User>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
+  nickName: () => Promise<AsyncIterator<String>>;
+  gender: () => Promise<AsyncIterator<Gender>>;
+  age: () => Promise<AsyncIterator<Int>>;
+  boards: <T = Promise<AsyncIterator<BoardSubscription>>>(args?: {
+    where?: BoardWhereInput;
+    orderBy?: BoardOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface UserNullablePromise
   extends Promise<User | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  nickName: () => Promise<String>;
+  gender: () => Promise<Gender>;
+  age: () => Promise<Int>;
+  boards: <T = FragmentableArray<Board>>(args?: {
+    where?: BoardWhereInput;
+    orderBy?: BoardOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface Lover {
+  id: ID_Output;
+  name: String;
+  gender: Gender;
+  season: Int;
+  firstEpNum: Int;
+  image?: String;
+  description?: String;
+  age?: Int;
+  job?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface LoverPromise extends Promise<Lover>, Fragmentable {
+  id: () => Promise<ID_Output>;
   name: () => Promise<String>;
+  gender: () => Promise<Gender>;
+  season: () => Promise<Int>;
+  firstEpNum: () => Promise<Int>;
+  image: () => Promise<String>;
+  description: () => Promise<String>;
+  age: () => Promise<Int>;
+  job: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface UserConnection {
+export interface LoverSubscription
+  extends Promise<AsyncIterator<Lover>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  gender: () => Promise<AsyncIterator<Gender>>;
+  season: () => Promise<AsyncIterator<Int>>;
+  firstEpNum: () => Promise<AsyncIterator<Int>>;
+  image: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  age: () => Promise<AsyncIterator<Int>>;
+  job: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface LoverNullablePromise
+  extends Promise<Lover | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  gender: () => Promise<Gender>;
+  season: () => Promise<Int>;
+  firstEpNum: () => Promise<Int>;
+  image: () => Promise<String>;
+  description: () => Promise<String>;
+  age: () => Promise<Int>;
+  job: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ArrowConnection {
   pageInfo: PageInfo;
-  edges: UserEdge[];
+  edges: ArrowEdge[];
 }
 
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
+export interface ArrowConnectionPromise
+  extends Promise<ArrowConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
+  edges: <T = FragmentableArray<ArrowEdge>>() => T;
+  aggregate: <T = AggregateArrowPromise>() => T;
 }
 
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
+export interface ArrowConnectionSubscription
+  extends Promise<AsyncIterator<ArrowConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ArrowEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateArrowSubscription>() => T;
 }
 
 export interface PageInfo {
@@ -237,6 +1457,222 @@ export interface PageInfoSubscription
   hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
   startCursor: () => Promise<AsyncIterator<String>>;
   endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ArrowEdge {
+  node: Arrow;
+  cursor: String;
+}
+
+export interface ArrowEdgePromise extends Promise<ArrowEdge>, Fragmentable {
+  node: <T = ArrowPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ArrowEdgeSubscription
+  extends Promise<AsyncIterator<ArrowEdge>>,
+    Fragmentable {
+  node: <T = ArrowSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateArrow {
+  count: Int;
+}
+
+export interface AggregateArrowPromise
+  extends Promise<AggregateArrow>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateArrowSubscription
+  extends Promise<AsyncIterator<AggregateArrow>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface BoardConnection {
+  pageInfo: PageInfo;
+  edges: BoardEdge[];
+}
+
+export interface BoardConnectionPromise
+  extends Promise<BoardConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<BoardEdge>>() => T;
+  aggregate: <T = AggregateBoardPromise>() => T;
+}
+
+export interface BoardConnectionSubscription
+  extends Promise<AsyncIterator<BoardConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<BoardEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateBoardSubscription>() => T;
+}
+
+export interface BoardEdge {
+  node: Board;
+  cursor: String;
+}
+
+export interface BoardEdgePromise extends Promise<BoardEdge>, Fragmentable {
+  node: <T = BoardPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface BoardEdgeSubscription
+  extends Promise<AsyncIterator<BoardEdge>>,
+    Fragmentable {
+  node: <T = BoardSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateBoard {
+  count: Int;
+}
+
+export interface AggregateBoardPromise
+  extends Promise<AggregateBoard>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateBoardSubscription
+  extends Promise<AsyncIterator<AggregateBoard>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface EpisodeConnection {
+  pageInfo: PageInfo;
+  edges: EpisodeEdge[];
+}
+
+export interface EpisodeConnectionPromise
+  extends Promise<EpisodeConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<EpisodeEdge>>() => T;
+  aggregate: <T = AggregateEpisodePromise>() => T;
+}
+
+export interface EpisodeConnectionSubscription
+  extends Promise<AsyncIterator<EpisodeConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<EpisodeEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateEpisodeSubscription>() => T;
+}
+
+export interface EpisodeEdge {
+  node: Episode;
+  cursor: String;
+}
+
+export interface EpisodeEdgePromise extends Promise<EpisodeEdge>, Fragmentable {
+  node: <T = EpisodePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface EpisodeEdgeSubscription
+  extends Promise<AsyncIterator<EpisodeEdge>>,
+    Fragmentable {
+  node: <T = EpisodeSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateEpisode {
+  count: Int;
+}
+
+export interface AggregateEpisodePromise
+  extends Promise<AggregateEpisode>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateEpisodeSubscription
+  extends Promise<AsyncIterator<AggregateEpisode>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface LoverConnection {
+  pageInfo: PageInfo;
+  edges: LoverEdge[];
+}
+
+export interface LoverConnectionPromise
+  extends Promise<LoverConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<LoverEdge>>() => T;
+  aggregate: <T = AggregateLoverPromise>() => T;
+}
+
+export interface LoverConnectionSubscription
+  extends Promise<AsyncIterator<LoverConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<LoverEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateLoverSubscription>() => T;
+}
+
+export interface LoverEdge {
+  node: Lover;
+  cursor: String;
+}
+
+export interface LoverEdgePromise extends Promise<LoverEdge>, Fragmentable {
+  node: <T = LoverPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface LoverEdgeSubscription
+  extends Promise<AsyncIterator<LoverEdge>>,
+    Fragmentable {
+  node: <T = LoverSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateLover {
+  count: Int;
+}
+
+export interface AggregateLoverPromise
+  extends Promise<AggregateLover>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateLoverSubscription
+  extends Promise<AsyncIterator<AggregateLover>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
+}
+
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
+}
+
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
 }
 
 export interface UserEdge {
@@ -288,6 +1724,224 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
+export interface ArrowSubscriptionPayload {
+  mutation: MutationType;
+  node: Arrow;
+  updatedFields: String[];
+  previousValues: ArrowPreviousValues;
+}
+
+export interface ArrowSubscriptionPayloadPromise
+  extends Promise<ArrowSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ArrowPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ArrowPreviousValuesPromise>() => T;
+}
+
+export interface ArrowSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ArrowSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ArrowSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ArrowPreviousValuesSubscription>() => T;
+}
+
+export interface ArrowPreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface ArrowPreviousValuesPromise
+  extends Promise<ArrowPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ArrowPreviousValuesSubscription
+  extends Promise<AsyncIterator<ArrowPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface BoardSubscriptionPayload {
+  mutation: MutationType;
+  node: Board;
+  updatedFields: String[];
+  previousValues: BoardPreviousValues;
+}
+
+export interface BoardSubscriptionPayloadPromise
+  extends Promise<BoardSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = BoardPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = BoardPreviousValuesPromise>() => T;
+}
+
+export interface BoardSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<BoardSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = BoardSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = BoardPreviousValuesSubscription>() => T;
+}
+
+export interface BoardPreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface BoardPreviousValuesPromise
+  extends Promise<BoardPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface BoardPreviousValuesSubscription
+  extends Promise<AsyncIterator<BoardPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface EpisodeSubscriptionPayload {
+  mutation: MutationType;
+  node: Episode;
+  updatedFields: String[];
+  previousValues: EpisodePreviousValues;
+}
+
+export interface EpisodeSubscriptionPayloadPromise
+  extends Promise<EpisodeSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = EpisodePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = EpisodePreviousValuesPromise>() => T;
+}
+
+export interface EpisodeSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<EpisodeSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = EpisodeSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = EpisodePreviousValuesSubscription>() => T;
+}
+
+export interface EpisodePreviousValues {
+  id: ID_Output;
+  number: Int;
+  season: Int;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface EpisodePreviousValuesPromise
+  extends Promise<EpisodePreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  number: () => Promise<Int>;
+  season: () => Promise<Int>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface EpisodePreviousValuesSubscription
+  extends Promise<AsyncIterator<EpisodePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  number: () => Promise<AsyncIterator<Int>>;
+  season: () => Promise<AsyncIterator<Int>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface LoverSubscriptionPayload {
+  mutation: MutationType;
+  node: Lover;
+  updatedFields: String[];
+  previousValues: LoverPreviousValues;
+}
+
+export interface LoverSubscriptionPayloadPromise
+  extends Promise<LoverSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = LoverPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = LoverPreviousValuesPromise>() => T;
+}
+
+export interface LoverSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<LoverSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = LoverSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = LoverPreviousValuesSubscription>() => T;
+}
+
+export interface LoverPreviousValues {
+  id: ID_Output;
+  name: String;
+  gender: Gender;
+  season: Int;
+  firstEpNum: Int;
+  image?: String;
+  description?: String;
+  age?: Int;
+  job?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface LoverPreviousValuesPromise
+  extends Promise<LoverPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  gender: () => Promise<Gender>;
+  season: () => Promise<Int>;
+  firstEpNum: () => Promise<Int>;
+  image: () => Promise<String>;
+  description: () => Promise<String>;
+  age: () => Promise<Int>;
+  job: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface LoverPreviousValuesSubscription
+  extends Promise<AsyncIterator<LoverPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  gender: () => Promise<AsyncIterator<Gender>>;
+  season: () => Promise<AsyncIterator<Int>>;
+  firstEpNum: () => Promise<AsyncIterator<Int>>;
+  image: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  age: () => Promise<AsyncIterator<Int>>;
+  job: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
 export interface UserSubscriptionPayload {
   mutation: MutationType;
   node: User;
@@ -315,22 +1969,49 @@ export interface UserSubscriptionPayloadSubscription
 
 export interface UserPreviousValues {
   id: ID_Output;
-  name: String;
+  nickName: String;
+  gender: Gender;
+  age: Int;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface UserPreviousValuesPromise
   extends Promise<UserPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
+  nickName: () => Promise<String>;
+  gender: () => Promise<Gender>;
+  age: () => Promise<Int>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface UserPreviousValuesSubscription
   extends Promise<AsyncIterator<UserPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
+  nickName: () => Promise<AsyncIterator<String>>;
+  gender: () => Promise<AsyncIterator<Gender>>;
+  age: () => Promise<AsyncIterator<Int>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
+
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
+
+/*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean;
+
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+*/
+export type Int = number;
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
@@ -339,19 +2020,14 @@ export type ID_Input = string | number;
 export type ID_Output = string;
 
 /*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+DateTime scalar input type, allowing Date
 */
-export type String = string;
+export type DateTimeInput = Date | string;
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+DateTime scalar output type, which is always a string
 */
-export type Int = number;
-
-/*
-The `Boolean` scalar type represents `true` or `false`.
-*/
-export type Boolean = boolean;
+export type DateTimeOutput = string;
 
 export type Long = string;
 
@@ -361,7 +2037,27 @@ export type Long = string;
 
 export const models: Model[] = [
   {
+    name: "Gender",
+    embedded: false
+  },
+  {
+    name: "Lover",
+    embedded: false
+  },
+  {
     name: "User",
+    embedded: false
+  },
+  {
+    name: "Arrow",
+    embedded: false
+  },
+  {
+    name: "Episode",
+    embedded: false
+  },
+  {
+    name: "Board",
     embedded: false
   }
 ];
