@@ -1,0 +1,26 @@
+{
+  "name": "heart-signal-server",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "repository": "https://github.com/daheeahn/heart-signal-server.git",
+  "author": "daheeahn <deg9810@likelion.org>",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.5",
+    "@nexus/schema": "^0.13.1",
+    "graphql": "^15.0.0",
+    "nexus": "^0.12.0",
+    "nodemon": "^2.0.3",
+    "typescript": "^3.8.3"
+  },
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "dev2": "ts-node src/schema/index.ts"
+  },
+  "devDependencies": {
+    "ts-node": "^8.8.2"
+  }
+}
