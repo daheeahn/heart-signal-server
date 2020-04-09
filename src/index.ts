@@ -8,7 +8,8 @@ import {
   arg,
   makeSchema,
 } from "@nexus/schema";
-import * as allTypes from "./schema";
+import { ApolloServer } from "apollo-server";
+import resolvers from "./graphql/resolvers";
 
 const Node = interfaceType({
   name: "Node",
@@ -53,10 +54,24 @@ const Query = queryType({
 // Recursively traverses the value passed to types looking for
 // any valid Nexus or graphql-js objects to add to the schema,
 // so you can be pretty flexible with how you import types here.
-const schema = makeSchema({
-  types: allTypes,
-  outputs: {},
-  // types: [Account, Node, Query, StatusEnum],
-  // or types: { Account, Node, Query }
-  // or types: [Account, [Node], { Query }]
+// const schema = makeSchema({
+// types: resolvers,
+// outputs: {},
+// types: [Account, Node, Query, StatusEnum],
+// or types: { Account, Node, Query }
+// or types: [Account, [Node], { Query }]
+// });
+
+const server = new ApolloServer({
+  typeDefs: `
+    type Query {
+      dahee: String!
+    }
+  `,
+  resolvers,
+  context: () => {
+    return { some: 1 };
+  },
 });
+
+server.listen().then(() => console.log("🚀 Apollo Server On!"));
